@@ -1,0 +1,20 @@
+author: mongoose-os
+description: Parola text effects library for MAX 7219
+type: lib
+version: 1.0
+
+sources:
+  - src
+includes:
+  - include
+libs:
+  - origin: https://github.com/mongoose-os-libs/arduino-compat
+  - origin: https://github.com/mongoose-os-libs/spi
+  - origin: https://github.com/mongoose-os-libs/arduino-md-max72xx
+
+tags:
+  - arduino
+  - c
+  - core
+
+manifest_version: 2017-09-29

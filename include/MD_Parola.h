@@ -287,6 +287,7 @@ takes about 1-2ms to update in the MD_MAX72XX display buffers.
 #define _MD_PAROLA_H
 
 #include <Arduino.h>
+#include <Print.h>
 #include <MD_MAX72xx.h>
 /**
  * \file
@@ -304,7 +305,7 @@ takes about 1-2ms to update in the MD_MAX72XX display buffers.
 #define ENA_GROW    1   ///< Enable grow effects
 
 // Miscellaneous defines
-#define ARRAY_SIZE(x) (sizeof(x)/sizeof(x[0]))  ///< Generic macro for obtaining number of elements of an array
+// #define ARRAY_SIZE(x) (sizeof(x)/sizeof(x[0]))  ///< Generic macro for obtaining number of elements of an array
 #define MAX_ZONES 4     ///< Maximum number of zones allowed. Change to allow more or less zones but uses RAM even if not used.
 
 class MD_Parola;
@@ -769,7 +770,7 @@ private:
   /***
     *  Structure for list of user defined characters substitutions.
   */
-  typedef struct charDef_t
+  struct charDef_t
   {
     uint8_t   code;   ///< the ASCII code for the user defined character
     uint8_t   *data;  ///< user supplied data
@@ -823,13 +824,13 @@ private:
   uint8_t getNextChar(void);      // put the next Text char into the char buffer
 
   // Font character handling data and methods
+  uint8_t   _charSpacing; // spacing in columns between characters
+  MD_MAX72XX::fontType_t  *_fontDef;  // font for this zone
   charDef_t *_userChars;  // the root of the list of user defined characters
   uint8_t   _cBufSize;    // allocated size of the array for loading character font (cBuf)
   uint8_t   *_cBuf;       // buffer for loading character font - allocated when font is set
-  uint8_t   _charSpacing; // spacing in columns between characters
   uint8_t   _charCols;    // number of columns for this character
   int16_t   _countCols;   // count of number of columns already shown
-  MD_MAX72XX::fontType_t  *_fontDef;  // font for this zone
 
   void      allocateFontBuffer(void); // allocate _cBuf based on the size of the largest font characters
   uint8_t   findChar(uint8_t code, uint8_t size, uint8_t *cBuf);	// look for user defined character
@@ -879,8 +880,7 @@ private:
  * Core object for the Parola library.
  * This class contains one or more zones for display.
  */
-class MD_Parola: public Print
-{
+class MD_Parola: public Print {
 public:
   /**
    * Class Constructor - arbitrary output pins.

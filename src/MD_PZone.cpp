@@ -284,7 +284,9 @@ uint8_t MD_PZone::findChar(uint8_t code, uint8_t size, uint8_t *cBuf)
     if (pcd->code == code)  // found it
     {
       PRINTS(" found character");
-      len = min(size, pcd->data[0]);
+      // TODO len = min(size, pcd->data[0]);
+      len = pcd->data[0];
+      if (len > size) len = size;
       memcpy(cBuf, &pcd->data[1], len);
       return(len);
     }

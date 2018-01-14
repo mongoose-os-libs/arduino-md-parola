@@ -3,6 +3,8 @@
 *.DS_Store
 #.gitignore
 
+deps/
+
 #dOxygen project documentation and related files
 #[Dd]oc/html/
 #[Mm]edia/photo/
