@@ -10,7 +10,7 @@ includes:
 libs:
   - origin: https://github.com/mongoose-os-libs/arduino-compat
   - origin: https://github.com/mongoose-os-libs/spi
-  - origin: https://github.com/mongoose-os-libs/arduino-md-max72xx
+  - origin: https://github.com/mongoose-os-libs/md-max72xx
 
 tags:
   - arduino
